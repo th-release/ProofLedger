@@ -1,0 +1,17 @@
+syntax = "proto3";
+package pl.factory.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "pl/factory/v1/params.proto";
+
+option go_package = "pl/x/factory/types";
+
+// GenesisState defines the factory module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

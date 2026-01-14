@@ -46,6 +46,7 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v10/modules/core/keeper"
 
 	"pl/docs"
+	factorymodulekeeper "pl/x/factory/keeper"
 )
 
 const (
@@ -98,7 +99,8 @@ type App struct {
 	TransferKeeper      ibctransferkeeper.Keeper
 
 	// simulation manager
-	sm *module.SimulationManager
+	sm            *module.SimulationManager
+	FactoryKeeper factorymodulekeeper.Keeper
 }
 
 func init() {
@@ -178,6 +180,7 @@ func New(
 		&app.ConsensusParamsKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.ParamsKeeper,
+		&app.FactoryKeeper,
 	); err != nil {
 		panic(err)
 	}
