@@ -21,8 +21,21 @@ func TestGenesisState_Validate(t *testing.T) {
 		},
 		{
 			desc:     "valid genesis state",
-			genState: &types.GenesisState{},
+			genState: &types.GenesisState{EntityMap: []types.Entity{{Clid: "0"}, {Clid: "1"}}},
 			valid:    true,
+		}, {
+			desc: "duplicated entity",
+			genState: &types.GenesisState{
+				EntityMap: []types.Entity{
+					{
+						Clid: "0",
+					},
+					{
+						Clid: "0",
+					},
+				},
+			},
+			valid: false,
 		},
 	}
 	for _, tc := range tests {

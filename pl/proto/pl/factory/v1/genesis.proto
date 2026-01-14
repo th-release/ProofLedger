@@ -1,8 +1,10 @@
 syntax = "proto3";
+
 package pl.factory.v1;
 
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
+import "pl/factory/v1/entity.proto";
 import "pl/factory/v1/params.proto";
 
 option go_package = "pl/x/factory/types";
@@ -14,4 +16,5 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+  repeated Entity entity_map = 2 [(gogoproto.nullable) = false];
 }

@@ -17,6 +17,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "params",
 					Short:     "Shows the parameters of the module",
 				},
+				{
+					RpcMethod: "ListEntity",
+					Use:       "list-entity",
+					Short:     "List all entity",
+				},
+				{
+					RpcMethod:      "GetEntity",
+					Use:            "get-entity [id]",
+					Short:          "Gets a entity",
+					Alias:          []string{"show-entity"},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "clid"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -27,6 +39,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
+				},
+				{
+					RpcMethod:      "CreateEntity",
+					Use:            "create-entity [clid] [hash] [event-time]",
+					Short:          "Create a new entity",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "clid"}, {ProtoField: "hash"}, {ProtoField: "event_time"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

@@ -1,10 +1,12 @@
 syntax = "proto3";
+
 package pl.factory.v1;
 
 import "amino/amino.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
+import "pl/factory/v1/entity.proto";
 import "pl/factory/v1/params.proto";
 
 option go_package = "pl/x/factory/types";
@@ -14,6 +16,16 @@ service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/pl/factory/v1/params";
+  }
+
+  // ListEntity Queries a list of Entity items.
+  rpc GetEntity(QueryGetEntityRequest) returns (QueryGetEntityResponse) {
+    option (google.api.http).get = "/pl/factory/v1/entity/{clid}";
+  }
+
+  // ListEntity defines the ListEntity RPC.
+  rpc ListEntity(QueryAllEntityRequest) returns (QueryAllEntityResponse) {
+    option (google.api.http).get = "/pl/factory/v1/entity";
   }
 }
 
@@ -27,4 +39,25 @@ message QueryParamsResponse {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+}
+
+// QueryGetEntityRequest defines the QueryGetEntityRequest message.
+message QueryGetEntityRequest {
+  string clid = 1;
+}
+
+// QueryGetEntityResponse defines the QueryGetEntityResponse message.
+message QueryGetEntityResponse {
+  Entity entity = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllEntityRequest defines the QueryAllEntityRequest message.
+message QueryAllEntityRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllEntityResponse defines the QueryAllEntityResponse message.
+message QueryAllEntityResponse {
+  repeated Entity entity = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

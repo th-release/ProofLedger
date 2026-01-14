@@ -1,0 +1,12 @@
+syntax = "proto3";
+package pl.factory.v1;
+
+option go_package = "pl/x/factory/types";
+
+// Entity defines the Entity message.
+message Entity {
+  string clid = 1;
+  string hash = 2;
+  int64 event_time = 3;
+  string creator = 4;
+}
