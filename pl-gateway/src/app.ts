@@ -6,8 +6,9 @@ import { env } from 'process';
 import { Abci } from './synchronizer/abci';
 import { Block } from './synchronizer/block';
 import { Validator } from './synchronizer/validator';
+import { PlController } from './pl/pl.controller';
 
-const controllers = [new AppController('/'), new WalletController('/wallet')]
+const controllers = [new AppController('/'), new WalletController('/wallet'), new PlController('/pl')]
 
 export default class App {
   public router: express.Application;
