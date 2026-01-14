@@ -44,7 +44,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "CreateEntity",
 					Use:            "create-entity [clid] [hash] [event-time]",
 					Short:          "Create a new entity",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "clid"}, {ProtoField: "hash"}, {ProtoField: "event_time"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "hash"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
