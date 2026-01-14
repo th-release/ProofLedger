@@ -39,7 +39,7 @@ export class PlService {
     });
   }
 
-  public async listToken(req: factory.QueryAllEntityRequest) {
+  public async listEntity(req: factory.QueryAllEntityRequest) {
     try {
       const client = await this.getProtobufRpcClient();
 
@@ -47,9 +47,7 @@ export class PlService {
 
       return {
         success: true,
-        data: {
-          storage: await queryCurrency.ListEntity(req)
-        }
+        data: await queryCurrency.ListEntity(req)
       };
     } catch (e) {
       return {
@@ -57,9 +55,27 @@ export class PlService {
         error: e
       };
     }
-}
+  }
 
-public async createEntity(wallet: DirectSecp256k1HdWallet | DirectSecp256k1Wallet, hash: string) {
+  public async detailEntity(req: factory.QueryGetEntityRequest) {
+    try {
+      const client = await this.getProtobufRpcClient();
+
+      const queryCurrency = new factory.QueryClientImpl(client)
+
+      return {
+        success: true,
+        data: await queryCurrency.GetEntity(req)
+      };
+    } catch (e) {
+      return {
+        success: false,
+        error: e
+      };
+    }
+  }
+
+  public async createEntity(wallet: DirectSecp256k1HdWallet | DirectSecp256k1Wallet, hash: string) {
     if (!wallet || (!hash || hash.length == 0)) {
       return {
         success: false,
